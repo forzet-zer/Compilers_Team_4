@@ -1,4 +1,4 @@
-#Requerements:#
+# Requerements:
 
 Python 3 [ https://www.python.org/downloads ]
 NLTK (Natural Language Tool Kit) [ https://www.nltk.org/install.html ] [ pip install nltk ]

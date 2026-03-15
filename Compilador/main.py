@@ -26,7 +26,7 @@ if not os.path.isfile(target_path):
 programa_fuente = open(target_path, 'r', encoding='utf-8').read()
 etapa = 6
 while etapa < 1 or etapa > 5:
-    print("\n* Input the number of the stage up to which you would like to execute the compilation proccess (default: 1):\n")
+    print("\n* Input the number of the stage up to which you would like to execute the compilation proccess:\n")
     print("(1) Lexical analysis\n")
     try:
         etapa = sys.stdin.readline()

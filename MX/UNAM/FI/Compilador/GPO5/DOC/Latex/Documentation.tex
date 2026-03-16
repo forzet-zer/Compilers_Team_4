@@ -3,7 +3,7 @@
 \usepackage{float}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+\usepackage[english]{babel}
 \usepackage{caption, subcaption} %figuras
 \usepackage{graphicx}
 \usepackage{array}
@@ -11,7 +11,8 @@
 \usepackage{imakeidx}
 \usepackage[style=ieee]{biblatex}
 \addbibresource{bib/protocolo.bib}
-
+\usepackage{xurl}
+\usepackage{hyperref}
 \graphicspath{{./figs/}}
 \usepackage{setspace}
 %\usepackage[round]{natbib}
@@ -96,14 +97,14 @@
 \section{Introduction} %
 
 \begin{itemize}
-    \item \textbf{Problem statement.} The , which will analyze a predefined Context-Free Grammar. 
+    \item \textbf{Problem statement.} It will be carried out the creation of a Lexer, which will analyze a Context-Free Grammar pre defined. 
     \item \textbf{Motivation.} Apply the concepts learned in class, related to the structure of the grammar, as well as how a Lexer works.
     \item \textbf{Objective.} Obtain a better understanding of the way a Lexer is structured, which is the first phase of a compiler.
 \end{itemize}
 
 \section{Theorical Framework}
 
-Grammar explains the way in which the elements of the language relate to each other in order to create valid strings  \cite{unam_gramatica}. It also allows the analyse of the meanings that these combinations produce. Its types are:
+Grammar explains the way in which the elements of the language relate to each other in order to create valid strings \cite{unam_gramatica}. It also allows the analyse of the meanings that these combinations produce. Its types are:
 
 \begin{itemize}
 \item \textbf{Type zero (``Unrestricted Grammar").} This kind of grammar lacks structural restrictions. Due to its structure, it is not desirable for this project.
@@ -121,7 +122,7 @@ V = Set of non-terminal symbols.
 
 S = Start symbol, where $S \in V$.
 
-P = Set of production rules.  \cite{unam_glc}
+P = Set of production rules. \cite{unam_glc}
 
 \item \textbf{Type three (``Regular Grammar").} Their productions are restricted to right- linear or left-linear forms.
 
@@ -129,7 +130,7 @@ P = Set of production rules.  \cite{unam_glc}
 
 Type two and type three grammars are commonly used on compiler designs. In this project, we will use a predefined Context-Free Grammar.
 
-\textbf{(inserte gramatica que dio reneeeeee)}\\
+\bigskip
 
 A Lexer, also known as a Lexical Analyzer, is the first phase of analysis in a compiler. Its main function is to read the set of characters that make up a source program. The Lexer groups them into lexemes, that is, meaningful sequences; for each lexeme, it produces, as an output, a token.\\
 
@@ -144,7 +145,7 @@ The most important points in lexical analysis are:
 \textbf{\item Structured output.} At the end of the lexical analysis, a sequence of well defined tokens is obtained.
 
 \end{itemize}
-The completion of lexical analysis allows the beginning of the next phase: syntactic analysis.  \cite{ramirez_analizadores}
+The completion of lexical analysis allows the beginning of the next phase: syntactic analysis. \cite{ramirez_analizadores}
 
 
 \bigskip
@@ -152,19 +153,23 @@ One of the libraries for implementing lexical analysis is RPLY. This is a pure P
 
 \bigskip
 
-To use these tools, the class called Lexer was created. In this class, the rules were defined to be able to identify the tokens given the input program.
 
-\section{Desarrollo}
+\section{System Design}
+The program relies on 3 main parts, the main file (main.py) that is the head of the project, used to manage and connect the different files and their respective outputs. The lexer (AnalizadorLexico.py) takes the source program that follow the grammar defined by it, reads the file and organizes every symbol it finds into tokens according to their individual definition. Finally the program folder holds the text file with extension .jp (Juan Pato files) that will then be the input for the respective analyzers.
 
-Es la descripción de la implementación realizada en el lenguaje de programación, así como las pruebas realizadas para obtener los resultados. Es importante resaltar lo siguiente:
+\subsection{main.py}
+Upon executing, the program asks the user to type the name of the file to be analyzed, if the form is left empty then the default program to access is "holamundo.jp", once the name is specified, the program tries to locate the specific file that should be found in the "programas" folder, if it isn't found then it prints on the screen that it failed to locate the file, otherwise it passes onto the analyzer home page. Here the user is able to either go ahead with the lexical analysis of the .jp file, or exit the compiler, if the Lexer is executed, it recovers the information coming from "AnalizadorLexico.py and outputs the list of tokens, their classification and the total amount found.
 
-\begin{itemize}
-    \item No se debe mostrar código, solo describir funciones o la aplicación de los conceptos teóricos.
-    \item Las pruebas es describir las entradas ingresadas y las salidas obtenidas.
-\end{itemize}
+\subsection{AnalizadorLexico.py}
+This is the file that carries the lexical analysis of the file, the first stage of the full compilation process. It employs the class lexer from the lexer generator library, this allows entries to be added to the lexer, by which we can define tokens with a name to identify each of them by, as well as the regular expression that the program expects to find in the .jp files and that it uses for cataloging each part of its contents. In doing so, we can define the grammar of the language for the compiler, and detect if a supposedly correct file follows the grammar properly or if it has lexical errors. It is able to classify all of the symbols and at the end of its execution, redirect the output to the main.py file to present the information to the user. 
+
+Some of the tokens that it is designed to accept are: the start of a program, the brackets that limit its span, the type of a variable, a variable name, a number, an operator (arithmetic, boolean, assignation), as well as what to ignore like white spaces and comments.
+
+\subsection{Programs folder}
+This folder that is on the same level as the files that compose the compiler, contains the text files of .jp extension which hold the programs to be analyzed by the Lexer, if it follows the grammar defined by it, then the compiler will output the list of tokens as well as the total amount, otherwise it will raise an error for it being lexically incorrect.
 
 
-\section{Resultados}
+\section{Results}
 
 To test the operation of the lexical analyzer, the following .jp program was used.
 
@@ -186,16 +191,12 @@ After running the lexical analyzer, the tokens in the example program were ident
 
 The list of identified tokens can be viewed in detail along with their respective classifications, as well as the total number of tokens in the given program; in this case, the total number of tokens was 13.
 
-\section{Conclusiones}
+\section{Conclusions}
+An analysis of the results obtained is presented, highlighting the importance of applying theoretical concepts to solve the problem. It is important to emphasize the following:
+Based on the obtained results, it can be observed that the theoretical concepts related to grammars and lexical analysis were correctly applied within the compilation process. By defining rules and patterns to identify tokens, the developed lexical analyzer was able to recognize and classify the different elements present in the input program.
+The results show that the tokenization process transforms a sequence of characters into an organized structure of tokens, which facilitates the subsequent analysis of the program. In this way, the importance of lexical analysis as the first stage in compiler design is demonstrated, since it allows the source code information to be structured for its processing in later stages of the compiler.
 
-Se presenta un análisis de los resultados obtenidos, donde se destaca la importancia de la aplicación de los conceptos teóricos para resolver el problema. Es importante resaltar lo siguiente:
 
-\begin{itemize}
-    \item No es describir si les gustó la actividad o no.
-    \item No es decir que se obtuvo de la práctica.
-    \item No es describir lo que fue difícil.
-\end{itemize}
 
 \printbibliography
-
 \end{document}

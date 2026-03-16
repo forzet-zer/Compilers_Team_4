@@ -9,8 +9,8 @@
 \usepackage{array}
 \usepackage{tikz}
 \usepackage{imakeidx}
-\usepackage{biblatex}
-\addbibresource{bib/protocolo.bib}
+\usepackage[style=ieee]{biblatex}
+\addbibresource{protocolo.bib}
 
 \graphicspath{{./figs/}}
 \usepackage{setspace}
@@ -103,7 +103,7 @@
 
 \section{Theorical Framework}
 
-Grammar explains the way in which the elements of the language relate to each other in order to create valid strings [1]. It also allows the analyse of the meanings that these combinations produce. Its types are:
+Grammar explains the way in which the elements of the language relate to each other in order to create valid strings  \cite{unam_gramatica}. It also allows the analyse of the meanings that these combinations produce. Its types are:
 
 \begin{itemize}
 \item \textbf{Type zero (``Unrestricted Grammar").} This kind of grammar lacks structural restrictions. Due to its structure, it is not desirable for this project.
@@ -121,7 +121,7 @@ V = Set of non-terminal symbols.
 
 S = Start symbol, where $S \in V$.
 
-P = Set of production rules. [2]
+P = Set of production rules.  \cite{unam_glc}
 
 \item \textbf{Type three (``Regular Grammar").} Their productions are restricted to right- linear or left-linear forms.
 
@@ -144,7 +144,7 @@ The most important points in lexical analysis are:
 \textbf{\item Structured output.} At the end of the lexical analysis, a sequence of well defined tokens is obtained.
 
 \end{itemize}
-The completion of lexical analysis allows the beginning of the next phase: syntactic analysis. [3]
+The completion of lexical analysis allows the beginning of the next phase: syntactic analysis.  \cite{ramirez_analizadores}
 
 
 \bigskip
@@ -163,10 +163,8 @@ Es la descripción de la implementación realizada en el lenguaje de programaci�
     \item Las pruebas es describir las entradas ingresadas y las salidas obtenidas.
 \end{itemize}
 
+
 \section{Resultados}
-
-Mediante capturas de pantalla y una breve descripción seguida de la captura se presentan los resultados finales de su aplicación.\bigskip
-
 
 To test the operation of the lexical analyzer, the following .jp program was used.
 
@@ -198,12 +196,6 @@ Se presenta un análisis de los resultados obtenidos, donde se destaca la import
     \item No es describir lo que fue difícil.
 \end{itemize}
 
-\section{Referencias}
-[1] Universidad Nacional Autónoma de México (UNAM), “La gramática (lo más básico),” LIEC. [Online]. Available: https://liec.dgb.unam.mx/index.php/escribe/la-gramatica-lo-mas-basico. [Accessed: 15-Mar-2026].
-
-[2] Universidad Nacional Autónoma de México (UNAM), “Gramáticas libres del contexto,” Departamento de Ciencias de la Computación, Dec. 13, 2005. [Online]. Available: https://turing.iimas.unam.mx/~luis/cursos/ALF_old/sesiones/tema14.pdf. [Accessed: 15-Mar-2026].
-
-[3] J. Ramirez, “Automatización y optimización de la generación de analizadores léxicos en la industria,” ResearchGate, Nov. 1, 2023. [Online]. Available: https://www.researchgate.net/profile/Juan-Ramirez-Gramajo/publication/375160887_AUTOMATIZACION_Y_OPTIMIZACION_DE_LA_GENERACION_DE_ANALIZADORES_LEXICOS_EN_LA_INDUSTRIA/links/65425f930426ef6369f53749/AUTOMATIZACION-Y-OPTIMIZACION-DE-LA-GENERACION-DE-ANALIZADORES-LEXICOS-EN-LA-INDUSTRIA.pdf. [Accessed: 15-Mar-2026].
 \printbibliography
-\end{document}
+
 \end{document}

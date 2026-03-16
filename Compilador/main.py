@@ -49,3 +49,5 @@ if etapa >= 1:
 
     for token in copy(tokens):
         print(token)
+
+    print(f"\nTokens: {len(list((tokens)))}")

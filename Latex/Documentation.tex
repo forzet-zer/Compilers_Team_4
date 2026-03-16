@@ -1,0 +1,173 @@
+\documentclass[letterpaper,12pt,oneside]{article}
+\usepackage[top=1in, left=1.25in, right=1.25in, bottom=1in]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+\usepackage{caption, subcaption} %figuras
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{imakeidx}
+\usepackage{biblatex}
+\addbibresource{bib/protocolo.bib}
+
+\graphicspath{{./figs/}}
+\usepackage{setspace}
+%\usepackage[round]{natbib}
+
+\begin{document}
+%\frontmatter
+\begin{titlepage}
+		\setlength{\parindent}{0pt} \setlength{\parskip}{0pt}
+	
+		\begin{center}
+			\vfill 
+			
+			\begin{minipage}{\textwidth}
+				
+				\newcolumntype{V}{>{\centering\arraybackslash} m{.17\textwidth} }
+				\newcolumntype{C}{>{\centering\arraybackslash} m{.56\textwidth} }
+				
+				\begin{center}
+					\includegraphics[width=4.5cm]{UNAM_LOGO2.png}	
+				\end{center} 	
+				\begin{center}
+					\Huge\textbf{Universidad Nacional Autónoma de México}
+				\end{center} 
+				
+			\end{minipage}
+				
+			\vfill
+			
+			\begin{minipage}{0.7\textwidth}
+				\begin{center}
+					\large Computer engineering
+				\end{center}
+			\end{minipage}
+			% 
+			\begin{center}
+				%\medskip \rule{.9\textwidth}{2pt}
+				\vfill
+				\large COMPILERS
+				%{\Large \bfseries  \title   }
+				
+				%\medskip \rule{.9\textwidth}{2pt}
+			\end{center}
+			
+			\begin{center}
+				\vspace*{1cm}
+				{\huge LEXER}\\
+				\vspace*{1cm}
+				
+				%PRESENTA:\\ \medskip
+				\begin{center}
+					STUDENTS: \\
+					\large 321117744 \\
+                    \large 309075318 NOMBRE\\
+                    \large 309075318 NOMBRE\\
+                    \large 309075318 NOMBRE\\
+                    \large 309075318 NOMBRE\\
+				\end{center}
+				
+				\bigskip
+				
+				Group: 5\\
+				Team: 4\\\
+				%Coadvisors
+				Semester: \\
+                2026-II
+			\end{center}
+			
+			\vfill
+			
+			\begin{center}
+				{México,CDMX. March 15th, 2026}\\
+			\end{center}
+			\cleardoublepage
+		\end{center}
+	\end{titlepage}
+ 
+\tableofcontents
+\clearpage
+    
+%\mainmatter
+
+\section{Introduction} %
+
+\begin{itemize}
+    \item \textbf{Problem statement.} The , which will analyze a predefined Context-Free Grammar. 
+    \item \textbf{Motivation.} Apply the concepts learned in class, related to the structure of the grammar, as well as how a Lexer works.
+    \item \textbf{Objective.} Obtain a better understanding of the way a Lexer is structured, which is the first phase of a compiler.
+\end{itemize}
+
+\section{Theorical Framework}
+
+Grammar explains the way in which the elements of the language relate to each other in order to create valid strings. It also allows the analyse of the meanings that these combinations produce. Its types are:
+
+\begin{itemize}
+\item \textbf{Type zero (``Unrestricted Grammar").} This kind of grammar lacks structural restrictions. Due to its structure, it is not desirable for this project.
+\item \textbf{Type one (``Context-Sensitive Grammar").} A production can be applied depending on the surrounding context of a symbol. The length of the string produced is greater than or equal to the length of the string that is being replaced.
+\item \textbf{Type two (``Context-Free Grammar")}. It is a notation to express strings of a language as a function of simpler strings. It is defined by a quadruple:
+
+\begin{center}
+G = (V, \(\Sigma\) , S, P)
+\end{center}
+Where
+
+V = Set of non-terminal symbols.
+
+ \(\Sigma\) = Alphabet, terminal, or lexical symbols.
+
+S = Start symbol, where $S \in V$.
+
+P = Set of production rules.
+
+\item \textbf{Type three (``Regular Grammar").} Their productions are restricted to right- linear or left-linear forms.
+
+\end{itemize}
+
+Type two and type three grammars are commonly used on compiler designs. In this project, we will use a predefined Context-Free Grammar.
+
+\textbf{(inserte gramatica que dio reneeeeee)}\\
+
+A Lexer, also known as a Lexical Analyzer, is the first phase of analysis in a compiler. Its main function is to read the set of characters that make up a source program. The Lexer groups them into lexemes, that is, meaningful sequences; for each lexeme, it produces, as an output, a token.\\
+
+The most important points in lexical analysis are:
+
+\begin{itemize}
+\item \textbf{Tokenization.} The input characters are divided into tokens, that is, meaningful units, such as identifiers, keywords, constants and operators.
+\item \textbf{Regular expressions.} They are used to define token patterns. They allow the classification of programming language elements during tokenization.
+\item \textbf{Removal of whitespace}. Elements that are not relevant for the lexical analysis are removed, such as spaces, comments and tabulations.
+\item \textbf{Symbol table}. A symbol table is usually constructed during the analysis, which stores information about constants and identifiers found in the source code.
+\item \textbf{Detection of lexical errors.} The Lexer reports lexical errors, such as unknown words and symbols, as well as illegal characters.
+\textbf{\item Structured output.} At the end of the lexical analysis, a sequence of well defined tokens is obtained.
+
+\end{itemize}
+The completion of lexical analysis allows the beginning of the next phase: syntactic analysis.
+
+\section{Desarrollo}
+
+Es la descripción de la implementación realizada en el lenguaje de programación, así como las pruebas realizadas para obtener los resultados. Es importante resaltar lo siguiente:
+
+\begin{itemize}
+    \item No se debe mostrar código, solo describir funciones o la aplicación de los conceptos teóricos.
+    \item Las pruebas es describir las entradas ingresadas y las salidas obtenidas.
+\end{itemize}
+
+\section{Resultados}
+
+Mediante capturas de pantalla y una breve descripción seguida de la captura se presentan los resultados finales de su aplicación.
+
+\section{Conclusiones}
+
+Se presenta un análisis de los resultados obtenidos, donde se destaca la importancia de la aplicación de los conceptos teóricos para resolver el problema. Es importante resaltar lo siguiente:
+
+\begin{itemize}
+    \item No es describir si les gustó la actividad o no.
+    \item No es decir que se obtuvo de la práctica.
+    \item No es describir lo que fue difícil.
+\end{itemize}
+
+\printbibliography
+\end{document}

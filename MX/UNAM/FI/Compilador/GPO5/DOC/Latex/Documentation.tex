@@ -1,6 +1,6 @@
 \documentclass[letterpaper,12pt,oneside]{article}
 \usepackage[top=1in, left=1.25in, right=1.25in, bottom=1in]{geometry}
-
+\usepackage{float}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
@@ -146,7 +146,11 @@ The most important points in lexical analysis are:
 \end{itemize}
 The completion of lexical analysis allows the beginning of the next phase: syntactic analysis. [3]
 
+
+\bigskip
 One of the libraries for implementing lexical analysis is RPLY. This is a pure Python parser generator that offers easy-to-use tools to indicate the rules needed for this type of analysis through a LexerGenerator instance, which represents a set of rules that match pieces of text that should either be turned into tokens or ignored by the Lexer. Rules are added using the method called add or ignored with 'ignore'.
+
+\bigskip
 
 To use these tools, the class called Lexer was created. In this class, the rules were defined to be able to identify the tokens given the input program.
 
@@ -161,7 +165,28 @@ Es la descripción de la implementación realizada en el lenguaje de programaci�
 
 \section{Resultados}
 
-Mediante capturas de pantalla y una breve descripción seguida de la captura se presentan los resultados finales de su aplicación.
+Mediante capturas de pantalla y una breve descripción seguida de la captura se presentan los resultados finales de su aplicación.\bigskip
+
+
+To test the operation of the lexical analyzer, the following .jp program was used.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{holamundojp.png}
+    \caption{holamundo.jp}
+    \label{fig:placeholder}
+\end{figure}
+
+After running the lexical analyzer, the tokens in the example program were identified and their correct count was obtained. The following image shows the output of the lexical analyzer:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{outputLexicalAnalyzerEx1.png}
+    \caption{Output of the lexical analyzer - holamundo.jp}
+    \label{fig:placeholder}
+\end{figure}
+
+The list of identified tokens can be viewed in detail along with their respective classifications, as well as the total number of tokens in the given program; in this case, the total number of tokens was 13.
 
 \section{Conclusiones}
 
@@ -180,4 +205,5 @@ Se presenta un análisis de los resultados obtenidos, donde se destaca la import
 
 [3] J. Ramirez, “Automatización y optimización de la generación de analizadores léxicos en la industria,” ResearchGate, Nov. 1, 2023. [Online]. Available: https://www.researchgate.net/profile/Juan-Ramirez-Gramajo/publication/375160887_AUTOMATIZACION_Y_OPTIMIZACION_DE_LA_GENERACION_DE_ANALIZADORES_LEXICOS_EN_LA_INDUSTRIA/links/65425f930426ef6369f53749/AUTOMATIZACION-Y-OPTIMIZACION-DE-LA-GENERACION-DE-ANALIZADORES-LEXICOS-EN-LA-INDUSTRIA.pdf. [Accessed: 15-Mar-2026].
 \printbibliography
+\end{document}
 \end{document}

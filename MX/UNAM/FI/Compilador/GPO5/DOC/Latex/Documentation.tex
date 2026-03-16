@@ -103,7 +103,7 @@
 
 \section{Theorical Framework}
 
-Grammar explains the way in which the elements of the language relate to each other in order to create valid strings. It also allows the analyse of the meanings that these combinations produce. Its types are:
+Grammar explains the way in which the elements of the language relate to each other in order to create valid strings [1]. It also allows the analyse of the meanings that these combinations produce. Its types are:
 
 \begin{itemize}
 \item \textbf{Type zero (``Unrestricted Grammar").} This kind of grammar lacks structural restrictions. Due to its structure, it is not desirable for this project.
@@ -121,7 +121,7 @@ V = Set of non-terminal symbols.
 
 S = Start symbol, where $S \in V$.
 
-P = Set of production rules.
+P = Set of production rules. [2]
 
 \item \textbf{Type three (``Regular Grammar").} Their productions are restricted to right- linear or left-linear forms.
 
@@ -144,7 +144,7 @@ The most important points in lexical analysis are:
 \textbf{\item Structured output.} At the end of the lexical analysis, a sequence of well defined tokens is obtained.
 
 \end{itemize}
-The completion of lexical analysis allows the beginning of the next phase: syntactic analysis.
+The completion of lexical analysis allows the beginning of the next phase: syntactic analysis. [3]
 
 One of the libraries for implementing lexical analysis is RPLY. This is a pure Python parser generator that offers easy-to-use tools to indicate the rules needed for this type of analysis through a LexerGenerator instance, which represents a set of rules that match pieces of text that should either be turned into tokens or ignored by the Lexer. Rules are added using the method called add or ignored with 'ignore'.
 

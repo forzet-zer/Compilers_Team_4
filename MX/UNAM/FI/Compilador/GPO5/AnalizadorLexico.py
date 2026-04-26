@@ -17,27 +17,38 @@ class Lexer():
         self.lexer.add('L_PARENTHESYS', r'\(')
         self.lexer.add('R_PARENTHESYS', r'\)')
         self.lexer.add('SEMI_COLON', r'\;')
-        # REAL
+
+
+        self.lexer.add('IF', r'if')
+        self.lexer.add('THEN', r'then')
+        self.lexer.add('ELSE', r'else')
+        self.lexer.add('WHILE', r'while')
+        self.lexer.add('FOR', r'for')
+        self.lexer.add('FROM', r'from')
+        self.lexer.add('TO', r'to')
+
+
+
         self.lexer.add('REAL_NUMBER', r'-?\d+\.\d+')
-        # INTEGER
         self.lexer.add('INTEGER', r'-?\d+')
+        self.lexer.add('STRING', r'".*"')
+        self.lexer.add('BOOL', r'True|False')
+
+        # --- Operators ---
         self.lexer.add('ARIT_OP', r'\+|-|\*|/')
         self.lexer.add('COMP_OP', r'==|!=|>=|<=|<|>')
-        # STRING
-        self.lexer.add('STRING', r'".*"')
-        self.lexer.add('WRITING_OP', r'printf')
-        self.lexer.add('COMMENT', r'#.*')
-
-        # BOOLEAN
-        self.lexer.add('BOOL', r'Verdadero|Falso')
         self.lexer.add('BOOL_OP', r'\b(or|and|not)\b')
-
-        # IDENTIFIER
-        self.lexer.add('TYPE', r'int|bool|string|real')
         self.lexer.add('ASIG_OP', r'=')
-        self.lexer.add('ID', r'[a-z][a-zA-Z_\d]*')
-        # WHITESPACE AND COMMENTS
 
+        # --- I/O Operations ---
+        self.lexer.add('READ_OP', r'read')
+        self.lexer.add('WRITING_OP', r'printf')
+
+        # --- Identifiers ---
+        self.lexer.add('TYPE', r'int|bool|string|real')
+        self.lexer.add('ID', r'[a-z][a-zA-Z_\d]*')
+
+        # --- Whitespace and Comments ---
         self.lexer.ignore(r'\s+')
         self.lexer.ignore(r'#.*')
 

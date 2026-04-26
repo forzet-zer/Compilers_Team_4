@@ -1,4 +1,7 @@
 from AnalizadorLexico import Lexer
+from  Parser import Parser
+from SemanticAnalyzer import SemAnalyzer
+from Tree import Tree
 import sys
 from copy import copy
 import os.path
@@ -30,6 +33,8 @@ etapa = 6
 while etapa < 1 or etapa > 5:
     print("\nSelect compilation stage:\n")
     print("(1) Lexical analysis\n")
+    print("(2) Parsing \n")
+    print("(3) Semantic analysis \n")
 
     try:
         etapa = int(sys.stdin.readline().rstrip())
@@ -70,3 +75,34 @@ if etapa >= 1:
     print(f"Total tokens identified: {contador}\n")
 
     print("Lexical analysis completed.\n")
+
+if etapa>=2:
+  tabla_simbolos = dict()
+  print("\033[0m\033[92m\n----------------------------------------------------")
+  print("Starting syntactic analyzer...")
+  print("----------------------------------------------------\n\033[0m")
+  pg = Parser()
+  pg.parse()
+  parser = pg.get_parser()
+  ast = parser.parse(lexer.lex(programa_fuente))
+  f = open("AST.txt", "w")
+  print("\nABSTRACT SYNTAX TREE:\n\033[93m")
+  ast.print(f)
+  f.close()
+  ast_file = open('AST.txt', 'r')
+  Lines = ast_file.readlines()
+  for line in Lines:
+    print(line)
+  tabla_simbolos = pg.get_symbols()
+  if len(tabla_simbolos)>0:
+    print("\n\033[0m\nSymbol table\n")
+    print(pg.get_symbols())
+if etapa==3:
+    print("\033[0m\033[92m\n----------------------------------------------------")
+    print("Starting semantic analysis...")
+    print("----------------------------------------------------\n\033[0m")
+    semAnalizer = SemAnalyzer(tabla_simbolos)
+    num_errores = semAnalizer.verify(ast)
+    if num_errores>0:
+        print("\nERRORES SEMÁNTICOS: "+str(num_errores))
+        etapa = 3

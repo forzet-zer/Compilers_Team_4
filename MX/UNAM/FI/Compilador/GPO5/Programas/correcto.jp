@@ -1,0 +1,22 @@
+Start {
+int a = 10;
+int b = 5;
+real c = 2.5;
+bool flag = True;
+string msg = "Loop example";
+
+printf(msg);
+
+if flag then {
+    printf("Inside if");
+}
+
+while flag {
+    printf("While running");
+    flag = False;
+}
+
+for i from 1 to 3 {
+    printf("For iteration");
+}
+}

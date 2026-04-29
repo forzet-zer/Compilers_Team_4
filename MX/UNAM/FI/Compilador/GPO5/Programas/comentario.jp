@@ -1,0 +1,4 @@
+Start {
+# esto es un comentario
+int a = 10;
+}

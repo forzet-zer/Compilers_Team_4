@@ -48,10 +48,11 @@ class Lexer():
         self.lexer.add('TYPE', r'int|bool|string|real')
         self.lexer.add('ID', r'[a-z][a-zA-Z_\d]*')
 
+        self.lexer.add('COMMENT', r'#.*')
+
         # --- Whitespace and Comments ---
         self.lexer.ignore(r'\s+')
-        self.lexer.ignore(r'#.*')
-
+        
     def get_lexer(self):
         self._add_tokens()
         return self.lexer.build()

@@ -84,7 +84,13 @@ if etapa>=2:
   pg = Parser()
   pg.parse()
   parser = pg.get_parser()
-  ast = parser.parse(lexer.lex(programa_fuente))
+
+  try:
+    ast = parser.parse(lexer.lex(programa_fuente))
+    print("\033[92m\nParsing Success!\033[0m\n")
+  except Exception as e:
+    print("\033[91m\nParsing error...\033[0m\n")
+    exit()
   f = open("AST.txt", "w")
   print("\nABSTRACT SYNTAX TREE:\n\033[93m")
   ast.print(f)
@@ -103,6 +109,7 @@ if etapa==3:
     print("----------------------------------------------------\n\033[0m")
     semAnalizer = SemAnalyzer(tabla_simbolos)
     num_errores = semAnalizer.verify(ast)
-    if num_errores>0:
-        print("\nERRORES SEMÁNTICOS: "+str(num_errores))
-        etapa = 3
+    if num_errores == 0:
+        print("\033[92mSDT Verified!\033[0m\n")
+    else:
+        print("\033[91mSDT error...\033[0m\n")

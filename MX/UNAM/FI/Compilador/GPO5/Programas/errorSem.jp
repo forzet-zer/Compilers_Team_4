@@ -1,0 +1,14 @@
+Start {
+    # 1. Type Mismatch (The most common semantic error)
+    int edad = 25;
+    edad = "veinticinco"; # Error: Variable 'int' receiving a 'string'
+
+    # 2. Undeclared Variable (Caught by the Symbol Table check)
+    puntos = 100; # Error: 'puntos' has not been declared
+
+    # 3. Invalid Logic Condition (caught by 'if' check)
+    real pi = 3.1416;
+    if pi then {
+        printf "Esto no deberia funcionar";
+    } # Error: Expected 'bool' for 'if' condition, got 'real'
+}

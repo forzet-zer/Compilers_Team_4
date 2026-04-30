@@ -4,199 +4,251 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{caption, subcaption} %figuras
 \usepackage{graphicx}
 \usepackage{array}
-\usepackage{tikz}
-\usepackage{imakeidx}
-\usepackage[style=ieee]{biblatex}
-\addbibresource{bib/protocolo.bib}
-\usepackage{xurl}
+\usepackage{listings}
 \usepackage{hyperref}
+
 \graphicspath{{./figs/}}
-\usepackage{setspace}
-%\usepackage[round]{natbib}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    showstringspaces=false,
+    captionpos=b
+}
 
 \begin{document}
-%\frontmatter
+
+%--------------------------------------------------
+% PORTADA
+%--------------------------------------------------
+
 \begin{titlepage}
-		\setlength{\parindent}{0pt} \setlength{\parskip}{0pt}
-	
-		\begin{center}
-			\vfill 
-			
-			\begin{minipage}{\textwidth}
-				
-				\newcolumntype{V}{>{\centering\arraybackslash} m{.17\textwidth} }
-				\newcolumntype{C}{>{\centering\arraybackslash} m{.56\textwidth} }
-				
-				\begin{center}
-					\includegraphics[width=4.5cm]{UNAM_LOGO2.png}	
-				\end{center} 	
-				\begin{center}
-					\Huge\textbf{Universidad Nacional Autónoma de México}
-				\end{center} 
-				
-			\end{minipage}
-				
-			\vfill
-			
-			\begin{minipage}{0.7\textwidth}
-				\begin{center}
-					\large Computer engineering
-				\end{center}
-			\end{minipage}
-			% 
-			\begin{center}
-				%\medskip \rule{.9\textwidth}{2pt}
-				\vfill
-				\large COMPILERS
-				%{\Large \bfseries  \title   }
-				
-				%\medskip \rule{.9\textwidth}{2pt}
-			\end{center}
-			
-			\begin{center}
-				\vspace*{1cm}
-				{\huge LEXER}\\
-				\vspace*{1cm}
-				
-				%PRESENTA:\\ \medskip
-				\begin{center}
-					STUDENTS: \\
-					\large 321117744 \\
-                    \large 321339009 \\
-                    \large 321008215 \\
-                    \large 321032308 \\
-                    \large 320237012 \\
-				\end{center}
-				
-				\bigskip
-				
-				Group: 5\\
-				Team: 4\\\
-				%Coadvisors
-				Semester: \\
-                2026-II
-			\end{center}
-			
-			\vfill
-			
-			\begin{center}
-				{México,CDMX. March 15th, 2026}\\
-			\end{center}
-			\cleardoublepage
-		\end{center}
-	\end{titlepage}
- 
-\tableofcontents
-\clearpage
-    
-%\mainmatter
-
-\section{Introduction} %
-
-\begin{itemize}
-    \item \textbf{Problem statement.} It will be carried out the creation of a Lexer, which will analyze a Context-Free Grammar pre defined. 
-    \item \textbf{Motivation.} Apply the concepts learned in class, related to the structure of the grammar, as well as how a Lexer works.
-    \item \textbf{Objective.} Obtain a better understanding of the way a Lexer is structured, which is the first phase of a compiler.
-\end{itemize}
-
-\section{Theorical Framework}
-
-Grammar explains the way in which the elements of the language relate to each other in order to create valid strings \cite{unam_gramatica}. It also allows the analyse of the meanings that these combinations produce. Its types are:
-
-\begin{itemize}
-\item \textbf{Type zero (``Unrestricted Grammar").} This kind of grammar lacks structural restrictions. Due to its structure, it is not desirable for this project.
-\item \textbf{Type one (``Context-Sensitive Grammar").} A production can be applied depending on the surrounding context of a symbol. The length of the string produced is greater than or equal to the length of the string that is being replaced.
-\item \textbf{Type two (``Context-Free Grammar")}. It is a notation to express strings of a language as a function of simpler strings. It is defined by a quadruple:
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
 
 \begin{center}
-G = (V, \(\Sigma\) , S, P)
+\vfill
+
+\includegraphics[width=4.5cm]{UNAM_LOGO2.png}
+
+\vspace{0.5cm}
+{\Huge \textbf{Universidad Nacional Autónoma de México}}
+
+\vfill
+
+{\large Computer Engineering}
+
+\vfill
+
+{\large COMPILERS}
+
+\vspace{1cm}
+
+{\huge PARSER AND SDT}
+
+\vspace{1cm}
+
+STUDENTS: \\
+321117744 \\
+321339009 \\
+321008215 \\
+321032308 \\
+320237012 \\
+
+\vspace{1cm}
+
+Group: 5 \\
+Team: 4 \\
+Semester: 2026-II
+
+\vfill
+
+México, CDMX. April 30th, 2026
+
 \end{center}
-Where
+\end{titlepage}
 
-V = Set of non-terminal symbols.
+\tableofcontents
+\clearpage
 
- \(\Sigma\) = Alphabet, terminal, or lexical symbols.
+%--------------------------------------------------
 
-S = Start symbol, where $S \in V$.
+\section{Introduction}
 
-P = Set of production rules. \cite{unam_glc}
+\subsection{Problem Statement}
+This project extends the previously developed lexical analyzer by implementing a parser and a Syntax-Directed Translation (SDT) system based on a Context-Free Grammar.
 
-\item \textbf{Type three (``Regular Grammar").} Their productions are restricted to right- linear or left-linear forms.
+\subsection{Motivation}
+To apply the concepts learned in class related to parsing techniques and semantic analysis, and to understand how different phases of a compiler interact.
 
-\end{itemize}
+\subsection{Objective}
+To develop a syntactic analyzer capable of validating program structure, generating an Abstract Syntax Tree (AST), and performing semantic verification using SDT rules.
 
-Type two and type three grammars are commonly used on compiler designs. In this project, we will use a predefined Context-Free Grammar.
+%--------------------------------------------------
 
-\bigskip
+\section{Theoretical Framework}
 
-A Lexer, also known as a Lexical Analyzer, is the first phase of analysis in a compiler. Its main function is to read the set of characters that make up a source program. The Lexer groups them into lexemes, that is, meaningful sequences; for each lexeme, it produces, as an output, a token.\\
-
-The most important points in lexical analysis are:
+A programming language is structured through syntax and semantics.
 
 \begin{itemize}
-\item \textbf{Tokenization.} The input characters are divided into tokens, that is, meaningful units, such as identifiers, keywords, constants and operators.
-\item \textbf{Regular expressions.} They are used to define token patterns. They allow the classification of programming language elements during tokenization.
-\item \textbf{Removal of whitespace}. Elements that are not relevant for the lexical analysis are removed, such as spaces, comments and tabulations.
-\item \textbf{Symbol table}. A symbol table is usually constructed during the analysis, which stores information about constants and identifiers found in the source code.
-\item \textbf{Detection of lexical errors.} The Lexer reports lexical errors, such as unknown words and symbols, as well as illegal characters.
-\textbf{\item Structured output.} At the end of the lexical analysis, a sequence of well defined tokens is obtained.
-
+    \item \textbf{Syntax:} Defines the rules that determine the structure of valid statements in a language.
+    \item \textbf{Semantics:} Defines the meaning of those statements.
 \end{itemize}
-The completion of lexical analysis allows the beginning of the next phase: syntactic analysis. \cite{ramirez_analizadores}
 
+A compiler follows several phases:
+
+\begin{enumerate}
+    \item Lexical analysis
+    \item Syntax analysis
+    \item Semantic analysis
+\end{enumerate}
 
 \bigskip
-One of the libraries for implementing lexical analysis is RPLY. This is a pure Python parser generator that offers easy-to-use tools to indicate the rules needed for this type of analysis through a LexerGenerator instance, which represents a set of rules that match pieces of text that should either be turned into tokens or ignored by the Lexer. Rules are added using the method called add or ignored with 'ignore'.
+
+The \textbf{Parser} validates the grammatical structure of the program and generates an Abstract Syntax Tree (AST).
 
 \bigskip
 
+A \textbf{Bottom-Up parsing} strategy is used in this project through the RPLY library.
+
+\bigskip
+
+\textbf{Syntax-Directed Translation (SDT)} allows the execution of semantic actions associated with grammar rules, enabling type checking and symbol management.
+
+\bigskip
+
+The \textbf{AST} represents the logical structure of the program.
+
+%--------------------------------------------------
+
+\section{Grammar Definition}
+
+The following Context-Free Grammar defines the structure of the Juan Pato language.
+
+\subsection{Program Structure}
+
+\begin{lstlisting}
+program → Start { instructions }
+
+instructions → instruction instructions
+             | instruction
+\end{lstlisting}
+
+\subsection{Instructions}
+
+\begin{lstlisting}
+instruction → writing
+            | reading
+            | declaration
+            | assignment
+            | if
+            | if-else
+            | while
+            | for
+            | comment
+\end{lstlisting}
+
+\subsection{Statements}
+
+\begin{lstlisting}
+writing → printf expression ;
+reading → read ID ;
+
+declaration → TYPE ID ;
+declaration → TYPE ID = expression ;
+
+assignment → ID = expression ;
+\end{lstlisting}
+
+\subsection{Control Structures}
+
+\begin{lstlisting}
+if → if expression then { instructions }
+
+if-else → if expression then { instructions }
+          else { instructions }
+
+while → while expression { instructions }
+
+for → for ID from expression to expression { instructions }
+\end{lstlisting}
+
+\subsection{Expressions}
+
+\begin{lstlisting}
+expression → expression ARIT_OP expression
+           | expression COMP_OP expression
+           | expression BOOL_OP expression
+           | ( expression )
+           | ID
+           | INTEGER
+           | REAL
+           | STRING
+           | BOOL
+\end{lstlisting}
+
+%--------------------------------------------------
 
 \section{System Design}
-The program relies on 3 main parts, the main file (main.py) that is the head of the project, used to manage and connect the different files and their respective outputs. The lexer (AnalizadorLexico.py) takes the source program that follow the grammar defined by it, reads the file and organizes every symbol it finds into tokens according to their individual definition. Finally the program folder holds the text file with extension .jp (Juan Pato files) that will then be the input for the respective analyzers.
+
+The compiler consists of three main modules.
 
 \subsection{main.py}
-Upon executing, the program asks the user to type the name of the file to be analyzed, if the form is left empty then the default program to access is "holamundo.jp", once the name is specified, the program tries to locate the specific file that should be found in the "programas" folder, if it isn't found then it prints on the screen that it failed to locate the file, otherwise it passes onto the analyzer home page. Here the user is able to either go ahead with the lexical analysis of the .jp file, or exit the compiler, if the Lexer is executed, it recovers the information coming from "AnalizadorLexico.py and outputs the list of tokens, their classification and the total amount found.
+Controls execution flow and stage selection.
 
-\subsection{AnalizadorLexico.py}
-This is the file that carries the lexical analysis of the file, the first stage of the full compilation process. It employs the class lexer from the lexer generator library, this allows entries to be added to the lexer, by which we can define tokens with a name to identify each of them by, as well as the regular expression that the program expects to find in the .jp files and that it uses for cataloging each part of its contents. In doing so, we can define the grammar of the language for the compiler, and detect if a supposedly correct file follows the grammar properly or if it has lexical errors. It is able to classify all of the symbols and at the end of its execution, redirect the output to the main.py file to present the information to the user. 
+\subsection{Lexical Analyzer}
+Generates tokens from the source code.
 
-Some of the tokens that it is designed to accept are: the start of a program, the brackets that limit its span, the type of a variable, a variable name, a number, an operator (arithmetic, boolean, assignation), as well as what to ignore like white spaces and comments.
+\subsection{Parser}
+Validates syntax, builds AST, and generates symbol table.
 
-\subsection{Programs folder}
-This folder that is on the same level as the files that compose the compiler, contains the text files of .jp extension which hold the programs to be analyzed by the Lexer, if it follows the grammar defined by it, then the compiler will output the list of tokens as well as the total amount, otherwise it will raise an error for it being lexically incorrect.
+\subsection{Semantic Analyzer}
+Performs type checking and validates semantic rules.
 
+%--------------------------------------------------
 
 \section{Results}
 
-To test the operation of the lexical analyzer, the following .jp program was used.
+\subsection{Correct Program}
+Parsing succeeds, AST is generated, and SDT is verified.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\linewidth]{holamundojp.png}
-    \caption{holamundo.jp}
-    \label{fig:placeholder}
-\end{figure}
+\subsection{Syntax Error}
+Parsing fails and semantic analysis is not executed.
 
-After running the lexical analyzer, the tokens in the example program were identified and their correct count was obtained. The following image shows the output of the lexical analyzer:
+\subsection{Semantic Error}
+Parsing succeeds but SDT reports an error.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\linewidth]{outputLexicalAnalyzerEx1.png}
-    \caption{Output of the lexical analyzer - holamundo.jp}
-    \label{fig:placeholder}
-\end{figure}
-
-The list of identified tokens can be viewed in detail along with their respective classifications, as well as the total number of tokens in the given program; in this case, the total number of tokens was 13.
+%--------------------------------------------------
 
 \section{Conclusions}
-An analysis of the results obtained is presented, highlighting the importance of applying theoretical concepts to solve the problem. It is important to emphasize the following:
-Based on the obtained results, it can be observed that the theoretical concepts related to grammars and lexical analysis were correctly applied within the compilation process. By defining rules and patterns to identify tokens, the developed lexical analyzer was able to recognize and classify the different elements present in the input program.
-The results show that the tokenization process transforms a sequence of characters into an organized structure of tokens, which facilitates the subsequent analysis of the program. In this way, the importance of lexical analysis as the first stage in compiler design is demonstrated, since it allows the source code information to be structured for its processing in later stages of the compiler.
 
+The parser and SDT extend the compiler functionality by validating syntax and semantics, ensuring correct program structure and logic.
 
+%--------------------------------------------------
 
-\printbibliography
+\begin{thebibliography}{9}
+
+\bibitem{islas}
+B. M. Islas, ``Sintaxis Elemental,'' UAPA, UNAM, 2018.
+
+\bibitem{ucm}
+Universidad Complutense de Madrid, ``La semántica.''
+
+\bibitem{rdu}
+A. Martínez Romero et al., ``Language: instrument of human development,'' RDU, 2021.
+
+\bibitem{ibm}
+IBM, ``What is a Compiler?''
+
+\bibitem{marco}
+Marco, ``Parsing,'' MSMK University, 2025.
+
+\bibitem{geeks}
+GeeksforGeeks, ``Syntax-Directed Translation Schemes,'' 2025.
+
+\end{thebibliography}
+
 \end{document}
